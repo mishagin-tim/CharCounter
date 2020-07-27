@@ -95,4 +95,21 @@ class CharCounterTest {
 
 		assertFalse("Strings are equal", isEqual);
 	}
+
+	@Test
+	void countShouldReturnDiffentMapsWhenOneHasUppercaseWhileAnotherHasLowerCase() {
+		String first = charCounter.count("abracadabra");
+		String second = charCounter.count("AbrAcaDaBRa");
+
+		boolean isEqual = first.equals(second);
+
+		assertFalse("Strings are equal", isEqual);
+
+		first = charCounter.count("hello world!");
+		second = charCounter.count("Hello world!");
+
+		isEqual = first.equals(second);
+
+		assertFalse("Strings are equal", isEqual);
+	}
 }
