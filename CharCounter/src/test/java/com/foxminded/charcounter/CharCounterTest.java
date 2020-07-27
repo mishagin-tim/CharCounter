@@ -60,5 +60,12 @@ class CharCounterTest {
 		String actual = charCounter.count("hello world!");
 
 		assertEquals(expected, actual);
+		
+		expected = "\"g\" - 1\n" + "\"o\" - 2\n" + "\"d\" - 1\n" + "\"b\" - 1\n" + "\"y\" - 1\n" + "\"e\" - 1\n"
+				+ "\"!\" - 1\n";
+
+		actual = charCounter.count("goodbye!");
+
+		assertEquals(expected, actual);
 	}
 }
