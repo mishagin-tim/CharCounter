@@ -48,6 +48,15 @@ class CharCounterTest {
 	}
 
 	@Test
+	void countShouldReturnNumberOfEmptyCharactersWhenStringHasOnlyEmptyCharacters() {
+		String expected = "\" \" - 4\n";
+
+		String actual = charCounter.count("    ");
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
 	void countShouldReturnMapWithCharCountWhenStringIsPassed() {
 		String expected = "\"h\" - 1\n" +
 						  "\"e\" - 1\n" +
