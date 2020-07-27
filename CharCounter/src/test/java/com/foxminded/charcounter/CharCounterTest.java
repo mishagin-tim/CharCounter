@@ -1,5 +1,6 @@
 package com.foxminded.charcounter;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -72,5 +73,15 @@ class CharCounterTest {
 		actual = charCounter.count("goodbye!");
 
 		assertEquals(expected, actual);
+	}
+
+	@Test
+	void countShouldReturnEqualMapWhenTwoEqualStringsArePassedOneAfterAnother() {
+		String first = charCounter.count("Ivan");
+		String second = charCounter.count("Ivan");
+
+		boolean isEqual = first.equals(second);
+
+		assertTrue("Strings are not equal", isEqual);
 	}
 }
