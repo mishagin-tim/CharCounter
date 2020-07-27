@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CharCounter {
-	private Map<String, Map<String, Integer>> listOfAllCharacterInString;
+	private Map<String, Map<String, Integer>> pairsOfStringAndNumberOfCharacterMap;
 
 	public CharCounter() {
-		listOfAllCharacterInString = new HashMap<>();
+		pairsOfStringAndNumberOfCharacterMap = new HashMap<>();
 	}
 
 	public String count(String input) {
@@ -20,7 +20,7 @@ public class CharCounter {
 			throw new IllegalArgumentException("Input string can't be empty");
 		}
 
-		Map<String, Integer> numbersOfCharInString = listOfAllCharacterInString.get(input);
+		Map<String, Integer> numbersOfCharInString = pairsOfStringAndNumberOfCharacterMap.get(input);
 
 		if (numbersOfCharInString != null) {
 			return generateRawRepresentation(numbersOfCharInString);
