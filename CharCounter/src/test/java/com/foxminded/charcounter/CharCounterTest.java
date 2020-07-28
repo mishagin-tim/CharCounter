@@ -78,7 +78,7 @@ class CharCounterTest {
 
 		boolean isEqual = first.equals(second);
 
-		assertTrue(isEqual, "Strings are not equal");
+		assertTrue(isEqual, "Maps are not equal");
 	}
 
 	@Test
@@ -88,7 +88,7 @@ class CharCounterTest {
 
 		boolean isEqual = first.equals(second);
 
-		assertFalse(isEqual, "Strings are equal");
+		assertFalse(isEqual, "Maps are equal");
 	}
 
 	@Test
@@ -98,13 +98,13 @@ class CharCounterTest {
 
 		boolean isEqual = first.equals(second);
 
-		assertFalse(isEqual, "Strings are equal");
+		assertFalse(isEqual, "Maps are equal");
 
 		first = charCounter.count("hello world!").toString();
 		second = charCounter.count("Hello world!").toString();
 
 		isEqual = first.equals(second);
 
-		assertFalse(isEqual, "Strings are equal");
+		assertFalse(isEqual, "Maps are equal");
 	}
 }
