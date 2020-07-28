@@ -5,13 +5,27 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CharCounter {
-	private Map<String, Map<String, Integer>> pairsOfStringAndNumberOfCharacter;
+	private Map<String, Map<String, Integer>> cache;
 
 	public CharCounter() {
-		pairsOfStringAndNumberOfCharacter = new HashMap<>();
+		cache = new HashMap<>();
 	}
 
-	public String count(String input) {
+	public Map<String, Integer> count(String input) {
+		notNullAndNotEmptyRequired(input);
+
+		if (cache.containsKey(input)) {
+			return cache.get(input);
+		} else {
+			Map<String, Integer> newCount = countAndGet(input);
+
+			cache.put(input, newCount);
+
+			return newCount;
+		}
+	}
+
+	private void notNullAndNotEmptyRequired(String input) {
 		if (input == null) {
 			throw new IllegalArgumentException("Input arguments can't be null");
 		}
@@ -19,19 +33,9 @@ public class CharCounter {
 		if (input.isEmpty()) {
 			throw new IllegalArgumentException("Input string can't be empty");
 		}
-
-		Map<String, Integer> numbersOfCharInString = pairsOfStringAndNumberOfCharacter.get(input);
-
-		if (numbersOfCharInString != null) {
-			return generateRawRepresentation(numbersOfCharInString);
-		}
-
-		numbersOfCharInString = calculateCharactersOfString(input);
-
-		return generateRawRepresentation(numbersOfCharInString);
 	}
 
-	private Map<String, Integer> calculateCharactersOfString(String str) {
+	private Map<String, Integer> countAndGet(String str) {
 		Map<String, Integer> numbersOfCharInString = new LinkedHashMap<>();
 
 		String[] chars = str.split("");
@@ -41,19 +45,5 @@ public class CharCounter {
 		}
 
 		return numbersOfCharInString;
-	}
-
-	private String generateRawRepresentation(Map<String, Integer> numbersOfCharInString) {
-		StringBuilder resultString = new StringBuilder("");
-
-		for (Map.Entry<String, Integer> entry : numbersOfCharInString.entrySet()) {
-			resultString.append(decorateCharAndNumberForRawRepresentation(entry.getKey(), entry.getValue()));
-		}
-
-		return resultString.toString();
-	}
-
-	private String decorateCharAndNumberForRawRepresentation(String c, int number) {
-		return "\"" + c + "\"" + " - " + number + "\n";
 	}
 }

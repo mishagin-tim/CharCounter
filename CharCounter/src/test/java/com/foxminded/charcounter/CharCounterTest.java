@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,55 +42,41 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnOneCharWhenOneCharStringIsPassed() {
-		String expected = "\"h\" - 1\n";
+		String expected = "{h=1}";
 
-		String actual = charCounter.count("h");
+		String actual = charCounter.count("h").toString();
 		
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void countShouldReturnNumberOfEmptyCharactersWhenStringHasOnlyEmptyCharacters() {
-		String expected = "\" \" - 4\n";
+		String expected = "{ =4}";
 
-		String actual = charCounter.count("    ");
+		String actual = charCounter.count("    ").toString();
 
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void countShouldReturnMapWithCharCountWhenStringIsPassed() {
-		String expected = "\"h\" - 1\n" +
-						  "\"e\" - 1\n" +
-						  "\"l\" - 3\n" +
-						  "\"o\" - 2\n" +
-						  "\" \" - 1\n" +
-						  "\"w\" - 1\n" +
-						  "\"r\" - 1\n" +
-						  "\"d\" - 1\n" +
-						  "\"!\" - 1\n";
+		String expected = "{h=1, e=1, l=3, o=2,  =1, w=1, r=1, d=1, !=1}";
 
-		String actual = charCounter.count("hello world!");
+		String actual = charCounter.count("hello world!").toString();
 
 		assertEquals(expected, actual);
 		
-		expected = "\"g\" - 1\n" + 
-				   "\"o\" - 2\n" + 
-				   "\"d\" - 1\n" + 
-				   "\"b\" - 1\n" + 
-				   "\"y\" - 1\n" + 
-				   "\"e\" - 1\n" + 
-				   "\"!\" - 1\n";
+		expected = "{g=1, o=2, d=1, b=1, y=1, e=1, !=1}";
 
-		actual = charCounter.count("goodbye!");
+		actual = charCounter.count("goodbye!").toString();
 
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void countShouldReturnEqualMapWhenTwoEqualStringsArePassedOneAfterAnother() {
-		String first = charCounter.count("Ivan");
-		String second = charCounter.count("Ivan");
+		Map<String, Integer> first = charCounter.count("Ivan");
+		Map<String, Integer> second = charCounter.count("Ivan");
 
 		boolean isEqual = first.equals(second);
 
@@ -97,8 +85,8 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassed() {
-		String first = charCounter.count("Ivan");
-		String second = charCounter.count("Petr");
+		Map<String, Integer> first = charCounter.count("Ivan");
+		Map<String, Integer> second = charCounter.count("Petr");
 
 		boolean isEqual = first.equals(second);
 
@@ -107,8 +95,8 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnDiffentMapsWhenOneHasUppercaseWhileAnotherHasLowerCase() {
-		String first = charCounter.count("abracadabra");
-		String second = charCounter.count("AbrAcaDaBRa");
+		Map<String, Integer> first = charCounter.count("abracadabra");
+		Map<String, Integer> second = charCounter.count("AbrAcaDaBRa");
 
 		boolean isEqual = first.equals(second);
 
