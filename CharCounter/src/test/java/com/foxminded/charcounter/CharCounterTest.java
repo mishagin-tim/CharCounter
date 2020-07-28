@@ -1,11 +1,9 @@
 package com.foxminded.charcounter;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Map;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,38 +73,38 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnEqualMapWhenTwoEqualStringsArePassedOneAfterAnother() {
-		Map<String, Integer> first = charCounter.count("Ivan");
-		Map<String, Integer> second = charCounter.count("Ivan");
+		String first = charCounter.count("Ivan").toString();
+		String second = charCounter.count("Ivan").toString();
 
 		boolean isEqual = first.equals(second);
 
-		assertTrue("Strings are not equal", isEqual);
+		assertTrue(isEqual, "Strings are not equal");
 	}
 
 	@Test
 	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassed() {
-		Map<String, Integer> first = charCounter.count("Ivan");
-		Map<String, Integer> second = charCounter.count("Petr");
+		String first = charCounter.count("Ivan").toString();
+		String second = charCounter.count("Petr").toString();
 
 		boolean isEqual = first.equals(second);
 
-		assertFalse("Strings are equal", isEqual);
+		assertFalse(isEqual, "Strings are equal");
 	}
 
 	@Test
 	void countShouldReturnDiffentMapsWhenOneHasUppercaseWhileAnotherHasLowerCase() {
-		Map<String, Integer> first = charCounter.count("abracadabra");
-		Map<String, Integer> second = charCounter.count("AbrAcaDaBRa");
+		String first = charCounter.count("abracadabra").toString();
+		String second = charCounter.count("AbrAcaDaBRa").toString();
 
 		boolean isEqual = first.equals(second);
 
-		assertFalse("Strings are equal", isEqual);
+		assertFalse(isEqual, "Strings are equal");
 
-		first = charCounter.count("hello world!");
-		second = charCounter.count("Hello world!");
+		first = charCounter.count("hello world!").toString();
+		second = charCounter.count("Hello world!").toString();
 
 		isEqual = first.equals(second);
 
-		assertFalse("Strings are equal", isEqual);
+		assertFalse(isEqual, "Strings are equal");
 	}
 }
