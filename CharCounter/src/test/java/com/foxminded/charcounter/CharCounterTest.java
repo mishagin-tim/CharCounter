@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -73,8 +75,8 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnEqualMapWhenTwoEqualStringsArePassedOneAfterAnother() {
-		String first = charCounter.count("Ivan").toString();
-		String second = charCounter.count("Ivan").toString();
+		Map<String, Integer> first = charCounter.count("Ivan");
+		Map<String, Integer> second = charCounter.count("Ivan");
 
 		boolean isEqual = first.equals(second);
 
@@ -83,8 +85,8 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassed() {
-		String first = charCounter.count("Ivan").toString();
-		String second = charCounter.count("Petr").toString();
+		Map<String, Integer> first = charCounter.count("Ivan");
+		Map<String, Integer> second = charCounter.count("Petr");
 
 		boolean isEqual = first.equals(second);
 
@@ -93,15 +95,15 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnDiffentMapsWhenOneHasUppercaseWhileAnotherHasLowerCase() {
-		String first = charCounter.count("abracadabra").toString();
-		String second = charCounter.count("AbrAcaDaBRa").toString();
+		Map<String, Integer> first = charCounter.count("abracadabra");
+		Map<String, Integer> second = charCounter.count("AbrAcaDaBRa");
 
 		boolean isEqual = first.equals(second);
 
 		assertFalse(isEqual, "Maps are equal");
 
-		first = charCounter.count("hello world!").toString();
-		second = charCounter.count("Hello world!").toString();
+		first = charCounter.count("hello world!");
+		second = charCounter.count("Hello world!");
 
 		isEqual = first.equals(second);
 
