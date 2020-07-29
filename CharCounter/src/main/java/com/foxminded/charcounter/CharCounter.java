@@ -5,19 +5,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CharCounter {
-	private Map<String, Map<String, Integer>> cache;
+	private Map<String, Map<Character, Integer>> cache;
 
 	public CharCounter() {
 		cache = new HashMap<>();
 	}
 
-	public Map<String, Integer> count(String input) {
+	public Map<Character, Integer> count(String input) {
 		notNullAndNotEmptyRequired(input);
 
 		if (cache.containsKey(input)) {
 			return cache.get(input);
 		} else {
-			Map<String, Integer> newCount = countAndGet(input);
+			Map<Character, Integer> newCount = countAndGet(input);
 
 			cache.put(input, newCount);
 
@@ -35,12 +35,12 @@ public class CharCounter {
 		}
 	}
 
-	private Map<String, Integer> countAndGet(String str) {
-		Map<String, Integer> numbersOfCharInString = new LinkedHashMap<>();
+	private Map<Character, Integer> countAndGet(String str) {
+		Map<Character, Integer> numbersOfCharInString = new LinkedHashMap<>();
 
-		String[] chars = str.split("");
+		char[] chars = str.toCharArray();
 
-		for (String it : chars) {
+		for (Character it : chars) {
 			numbersOfCharInString.merge(it, 1, (prev, one) -> prev + one);
 		}
 
