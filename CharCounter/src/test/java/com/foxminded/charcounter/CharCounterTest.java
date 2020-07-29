@@ -44,6 +44,7 @@ class CharCounterTest {
 	@Test
 	void countShouldReturnOneCharWhenOneCharStringIsPassed() {
 		Map<Character, Integer> expected = new LinkedHashMap<>();
+
 		expected.put('h', 1);
 
 		Map<Character, Integer> actual = charCounter.count("h");
@@ -92,7 +93,7 @@ class CharCounterTest {
 	}
 
 	@Test
-	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassed() {
+	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassedOneAfterAnother() {
 		Map<Character, Integer> first = charCounter.count("Ivan");
 		Map<Character, Integer> second = charCounter.count("Petr");
 
