@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -42,41 +43,48 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnOneCharWhenOneCharStringIsPassed() {
-		String expected = "{h=1}";
+		Map<Character, Integer> expected = new LinkedHashMap<>();
+		expected.put('h', 1);
 
-		String actual = charCounter.count("h").toString();
+		Map<Character, Integer> actual = charCounter.count("h");
 		
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	void countShouldReturnNumberOfEmptyCharactersWhenStringHasOnlyEmptyCharacters() {
-		String expected = "{ =4}";
+	void countShouldReturnNumberOfSpaceCharactersWhenStringHasOnlySpaceCharacters() {
+		Map<Character, Integer> expected = new LinkedHashMap<>();
 
-		String actual = charCounter.count("    ").toString();
+		expected.put(' ', 4);
+
+		Map<Character, Integer> actual = charCounter.count("    ");
 
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void countShouldReturnMapWithCharCountWhenStringIsPassed() {
-		String expected = "{h=1, e=1, l=3, o=2,  =1, w=1, r=1, d=1, !=1}";
+		Map<Character, Integer> expected = new LinkedHashMap<>();
 
-		String actual = charCounter.count("hello world!").toString();
+		expected.put('h', 1);
+		expected.put('e', 1);
+		expected.put('l', 3);
+		expected.put('o', 2);
+		expected.put(' ', 1);
+		expected.put('w', 1);
+		expected.put('r', 1);
+		expected.put('d', 1);
+		expected.put('!', 1);
 
-		assertEquals(expected, actual);
-		
-		expected = "{g=1, o=2, d=1, b=1, y=1, e=1, !=1}";
-
-		actual = charCounter.count("goodbye!").toString();
+		Map<Character, Integer> actual = charCounter.count("hello world!");
 
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	void countShouldReturnEqualMapWhenTwoEqualStringsArePassedOneAfterAnother() {
-		Map<String, Integer> first = charCounter.count("Ivan");
-		Map<String, Integer> second = charCounter.count("Ivan");
+		Map<Character, Integer> first = charCounter.count("Ivan");
+		Map<Character, Integer> second = charCounter.count("Ivan");
 
 		boolean isEqual = first.equals(second);
 
@@ -85,8 +93,8 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnNotEqualMapsWhenTwoNotEqualStringsArePassed() {
-		Map<String, Integer> first = charCounter.count("Ivan");
-		Map<String, Integer> second = charCounter.count("Petr");
+		Map<Character, Integer> first = charCounter.count("Ivan");
+		Map<Character, Integer> second = charCounter.count("Petr");
 
 		boolean isEqual = first.equals(second);
 
@@ -95,17 +103,20 @@ class CharCounterTest {
 
 	@Test
 	void countShouldReturnDiffentMapsWhenOneHasUppercaseWhileAnotherHasLowerCase() {
-		Map<String, Integer> first = charCounter.count("abracadabra");
-		Map<String, Integer> second = charCounter.count("AbrAcaDaBRa");
+		Map<Character, Integer> first = charCounter.count("abracadabra");
+		Map<Character, Integer> second = charCounter.count("AbrAcaDaBRa");
 
 		boolean isEqual = first.equals(second);
 
 		assertFalse(isEqual, "Maps are equal");
+	}
 
-		first = charCounter.count("hello world!");
-		second = charCounter.count("Hello world!");
+	@Test
+	void countShouldReturnDiffentMapsWhenOneHasUppercaseWithSpacesWhileAnotherHasLowerCaseWithSpaces() {
+		Map<Character, Integer> first = charCounter.count("hello world!");
+		Map<Character, Integer> second = charCounter.count("Hello world!");
 
-		isEqual = first.equals(second);
+		boolean isEqual = first.equals(second);
 
 		assertFalse(isEqual, "Maps are equal");
 	}
