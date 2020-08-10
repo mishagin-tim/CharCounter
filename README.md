@@ -9,4 +9,5 @@ Since the counting operation can be time-consuming, the method should cache the 
 it will simply retrieve the stored result. Use collections and maps where appropriate.
 
 E.g.
+
 ![Example](https://github.com/mishagin-tim/CharCounter/blob/master/CharCounter/collection%20framework.png)
